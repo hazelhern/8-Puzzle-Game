@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:controller="Controller.PuzzleController"
+            xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx">
+
+    <top>
+        <Text text="8 Puzzle Solver" style="-fx-font-size: 24px;" BorderPane.alignment="CENTER"/>
+    </top>
+
+    <center>
+        <VBox spacing="20" alignment="CENTER">
+            <ImageView fx:id="uploadedImageView" fitWidth="300" fitHeight="300" preserveRatio="true"/>
+            <VBox spacing="15" alignment="CENTER">
+                <Button fx:id="uploadButton" text="Upload Image" onAction="#handleUploadImage"/>
+                <Button fx:id="shuffleButton" text="Shuffle" onAction="#handleShuffle"/>
+                <Button fx:id="solveButton" text="Solve" onAction="#handleSolve"/>
+            </VBox>
+        </VBox>
+    </center>
+
+</BorderPane>
