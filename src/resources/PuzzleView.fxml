@@ -38,9 +38,9 @@
 
         <!-- Buttons -->
         <HBox alignment="CENTER" spacing="10">
+            <Button fx:id="shuffleButton" text="Shuffle" onAction="#handleShuffle" visible="false"/>
             <Button fx:id="uploadButton" text="Upload Image" onAction="#handleUploadImage"/>
-            <Button fx:id="shuffleButton" text="Shuffle" onAction="#handleShuffle"/>
-            <Button fx:id="solveButton" text="Solve" onAction="#handleSolve"/>
+            <Button fx:id="solveButton" text="Solve" onAction="#handleSolve" visible="false"/>
         </HBox>
 
         <HBox alignment="CENTER">

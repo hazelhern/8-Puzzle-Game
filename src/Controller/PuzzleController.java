@@ -1,6 +1,7 @@
 package Controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
@@ -67,6 +68,7 @@ public class PuzzleController {
 
     @FXML
     private void handleUploadImage() {
+        solvedLabel.setVisible(false);
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an Image File");
         fileChooser.getExtensionFilters().addAll(
@@ -83,6 +85,8 @@ public class PuzzleController {
                 e.printStackTrace();
             }
         }
+        shuffleButton.setVisible(true);
+        solveButton.setVisible(true);
 
     }
 
