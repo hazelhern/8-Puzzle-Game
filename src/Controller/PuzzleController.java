@@ -152,6 +152,7 @@ public class PuzzleController {
         }
 
     private void displayTiles() {
+        puzzleGrid.setVisible(true);
         puzzleGrid.getChildren().clear();
 
         for (int i = 0; i < puzzleTiles.length; i++) {
