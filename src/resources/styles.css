@@ -4,3 +4,20 @@
     -fx-padding: 5px;
     -fx-background-color: #f9f9f9;
 }
+.root {
+    -fx-background-color: #f0f0f0;
+}
+
+.button {
+    -fx-padding: 8 16;
+    -fx-font-size: 14px;
+}
+
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.1, 2, 2);
+}
+
+.text {
+    -fx-font-weight: bold;
+}
+

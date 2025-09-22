@@ -11,11 +11,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/PuzzleView.fxml")));
-        Scene scene = new Scene(root, 600, 600);
-
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles.css")).toExternalForm());
-
-        primaryStage.setTitle("8 Puzzle Solver");
+        Scene scene = new Scene(root, 600, 700);
+        primaryStage.setTitle("8 Puzzle Game");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

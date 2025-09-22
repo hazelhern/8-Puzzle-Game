@@ -1,27 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane fx:controller="Controller.PuzzleController"
-            xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx">
+<StackPane fx:controller="Controller.PuzzleController"
+           xmlns:fx="http://javafx.com/fxml"
+           xmlns="http://javafx.com/javafx"
+           prefWidth="600" prefHeight="700">
 
-    <top>
-        <Text text="8 Puzzle Solver" style="-fx-font-size: 24px;" BorderPane.alignment="CENTER"/>
-    </top>
+    <!-- Background image (faded/opaque) -->
+    <ImageView fx:id="backgroundImageView"
+               fitWidth="400"
+               fitHeight="400"
+               preserveRatio="true"
+               opacity="0.2"
+               smooth="true" />
 
-    <center>
-        <VBox spacing="20" alignment="CENTER">
-            <ImageView fx:id="uploadedImageView" fitWidth="300" fitHeight="300" preserveRatio="true"/>
-            <VBox spacing="15" alignment="CENTER">
-                <Button fx:id="uploadButton" text="Upload Image" onAction="#handleUploadImage"/>
-                <Button fx:id="shuffleButton" text="Shuffle" onAction="#handleShuffle"/>
-                <Button fx:id="solveButton" text="Solve" onAction="#handleSolve"/>
-            </VBox>
-        </VBox>
-    </center>
+    <!-- Foreground content -->
+    <VBox alignment="CENTER" spacing="20">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
 
-</BorderPane>
+        <!-- Title -->
+        <Text text="8 Puzzle Game" style="-fx-font-size: 24px;" />
+
+        <!-- Puzzle Grid (placed directly over the faded background image) -->
+        <GridPane fx:id="puzzleGrid"
+                  alignment="CENTER"
+                  hgap="2" vgap="2"
+                  maxWidth="400" maxHeight="400" />
+
+        <!-- Buttons -->
+        <HBox alignment="CENTER" spacing="10">
+            <Button fx:id="uploadButton" text="Upload Image" onAction="#handleUploadImage"/>
+            <Button fx:id="shuffleButton" text="Shuffle" onAction="#handleShuffle"/>
+            <Button fx:id="solveButton" text="Solve" onAction="#handleSolve"/>
+        </HBox>
+    </VBox>
+</StackPane>
