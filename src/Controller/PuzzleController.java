@@ -113,7 +113,7 @@ public class PuzzleController {
 
     @FXML
     private void handleSolve() {
-        imageview.setVisible(true);
+        fullImageView.setVisible(true);
 
     }
 
