@@ -25,8 +25,6 @@ public class PuzzleController {
     private int blankTileIndex = 8;
     private Image originalImage;
 
-    private File image;
-
     public void initialize(){
         initializePuzzleState();
     }
@@ -111,9 +109,8 @@ public class PuzzleController {
     }
 
     @FXML
-    private File handleSolve() {
-        System.out.println("Solve clicked");
-        return image;
+    private void handleSolve() {
+        getCroppedSquareImage(originalImage);
     }
 
     private void createTiles(Image image) {
