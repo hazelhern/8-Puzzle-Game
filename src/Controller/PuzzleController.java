@@ -1,16 +1,12 @@
 package Controller;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.image.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -113,6 +109,7 @@ public class PuzzleController {
 
     @FXML
     private void handleSolve() {
+        handleUploadImage();
         System.out.println("Solve clicked");
 
     }
