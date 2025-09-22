@@ -153,6 +153,7 @@ public class PuzzleController {
 
     private void displayTiles() {
         puzzleGrid.setVisible(true);
+        backgroundImageView.setOpacity(0.2);
         puzzleGrid.getChildren().clear();
 
         for (int i = 0; i < puzzleTiles.length; i++) {
