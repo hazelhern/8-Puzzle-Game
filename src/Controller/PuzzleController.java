@@ -92,6 +92,7 @@ public class PuzzleController {
 
     @FXML
     private void handleShuffle() {
+        solvedLabel.setVisible(false);
         Random random = new Random();
 
         for (int i = 0; i < 100; i++) {
