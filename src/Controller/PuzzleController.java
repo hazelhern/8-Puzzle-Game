@@ -38,8 +38,6 @@ public class PuzzleController {
             if (imageStream != null) {
                 originalImage = new Image(imageStream);
                 createTiles(originalImage);
-                this.fullImageView = new ImageView(originalImage);
-                fullImageView.setVisible(false);
                 displayTiles();
             } else {
                 System.err.println("Default image not found at /images/default.jpg");
@@ -96,6 +94,9 @@ public class PuzzleController {
                 e.printStackTrace();
             }
         }
+
+        this.fullImageView = new ImageView(originalImage);
+        fullImageView.setVisible(false);
     }
 
     @FXML
@@ -113,7 +114,7 @@ public class PuzzleController {
 
     @FXML
     private void handleSolve() {
-        fullImageView.setVisible(true);
+        this.fullImageView.setVisible(true);
 
     }
 
