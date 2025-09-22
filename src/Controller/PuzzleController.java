@@ -30,27 +30,15 @@ public class PuzzleController {
     }
 
     public void initializePuzzleState(){
-        try {
-            InputStream imageStream = getClass().getResourceAsStream("/images/default.jpg");
 
-            if (imageStream != null) {
-                originalImage = new Image(imageStream);
-                createTiles(originalImage);
-                displayTiles();
-            } else {
-                System.err.println("Default image not found at /images/default.jpg");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void setupPuzzleWithImage(Image image) {
         Image croppedImage = getCroppedSquareImage(image);
 
         backgroundImageView.setImage(croppedImage);
-        backgroundImageView.setFitWidth(400);
-        backgroundImageView.setFitHeight(400);
+        backgroundImageView.setFitWidth(365);
+        backgroundImageView.setFitHeight(365);
 
         createTiles(croppedImage);
         displayTiles();
