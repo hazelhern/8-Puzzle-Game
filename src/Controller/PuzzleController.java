@@ -20,8 +20,6 @@ public class PuzzleController {
     @FXML private Button uploadButton;
     @FXML private Button shuffleButton;
     @FXML private Button solveButton;
-    @FXML private ImageView fullImageView;
-
     private ImageView[] puzzleTiles = new ImageView[9];
     private int blankTileIndex = 8;
     private Image originalImage;
@@ -95,8 +93,6 @@ public class PuzzleController {
             }
         }
 
-        this.fullImageView = new ImageView(originalImage);
-        fullImageView.setVisible(false);
     }
 
     @FXML
@@ -114,7 +110,8 @@ public class PuzzleController {
 
     @FXML
     private void handleSolve() {
-        this.fullImageView.setVisible(true);
+        puzzleGrid.setVisible(false);
+        backgroundImageView.setOpacity(100);
 
     }
 
