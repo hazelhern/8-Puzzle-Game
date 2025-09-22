@@ -24,6 +24,7 @@ public class PuzzleController {
     private ImageView[] puzzleTiles = new ImageView[9];
     private int blankTileIndex = 8;
     private Image originalImage;
+    private ImageView imageview;
 
     public void initialize(){
         initializePuzzleState();
@@ -36,6 +37,8 @@ public class PuzzleController {
             if (imageStream != null) {
                 originalImage = new Image(imageStream);
                 createTiles(originalImage);
+                this.imageview = new ImageView(originalImage);
+                imageview.setVisible(false);
                 displayTiles();
             } else {
                 System.err.println("Default image not found at /images/default.jpg");
@@ -82,7 +85,6 @@ public class PuzzleController {
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
-        this.image = selectedFile;
 
         if (selectedFile != null) {
             try {
@@ -110,7 +112,8 @@ public class PuzzleController {
 
     @FXML
     private void handleSolve() {
-        getCroppedSquareImage(originalImage);
+        imageview.setVisible(true);
+
     }
 
     private void createTiles(Image image) {

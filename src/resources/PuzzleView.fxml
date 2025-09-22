@@ -33,6 +33,12 @@
                   alignment="CENTER"
                   hgap="2" vgap="2"
                   maxWidth="400" maxHeight="400" />
+        <ImageView fx:id="fullImageView"
+                   fitWidth="400"
+                   fitHeight="400"
+                   preserveRatio="true"
+                   smooth="true" />
+
 
         <!-- Buttons -->
         <HBox alignment="CENTER" spacing="10">
