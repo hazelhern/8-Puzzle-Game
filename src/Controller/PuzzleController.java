@@ -20,11 +20,12 @@ public class PuzzleController {
     @FXML private Button uploadButton;
     @FXML private Button shuffleButton;
     @FXML private Button solveButton;
+    @FXML private ImageView fullImageView;
 
     private ImageView[] puzzleTiles = new ImageView[9];
     private int blankTileIndex = 8;
     private Image originalImage;
-    private ImageView imageview;
+
 
     public void initialize(){
         initializePuzzleState();
@@ -37,8 +38,8 @@ public class PuzzleController {
             if (imageStream != null) {
                 originalImage = new Image(imageStream);
                 createTiles(originalImage);
-                this.imageview = new ImageView(originalImage);
-                imageview.setVisible(false);
+                this.fullImageView = new ImageView(originalImage);
+                fullImageView.setVisible(false);
                 displayTiles();
             } else {
                 System.err.println("Default image not found at /images/default.jpg");
