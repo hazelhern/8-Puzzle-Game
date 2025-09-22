@@ -25,6 +25,8 @@ public class PuzzleController {
     private int blankTileIndex = 8;
     private Image originalImage;
 
+    private File image;
+
     public void initialize(){
         initializePuzzleState();
     }
@@ -82,6 +84,7 @@ public class PuzzleController {
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
+        this.image = selectedFile;
 
         if (selectedFile != null) {
             try {
@@ -108,10 +111,9 @@ public class PuzzleController {
     }
 
     @FXML
-    private void handleSolve() {
-        handleUploadImage();
+    private File handleSolve() {
         System.out.println("Solve clicked");
-
+        return image;
     }
 
     private void createTiles(Image image) {
