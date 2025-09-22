@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -15,11 +16,13 @@ import java.util.*;
 
 public class PuzzleController {
 
+
     @FXML private GridPane puzzleGrid;
     @FXML private ImageView backgroundImageView;
     @FXML private Button uploadButton;
     @FXML private Button shuffleButton;
     @FXML private Button solveButton;
+    @FXML private Label solvedLabel;
     private ImageView[] puzzleTiles = new ImageView[9];
     private int blankTileIndex = 8;
     private Image originalImage;
@@ -101,6 +104,7 @@ public class PuzzleController {
         puzzleGrid.setVisible(false);
         backgroundImageView.setOpacity(100);
 
+        solvedLabel.setVisible(true);
     }
 
     private void createTiles(Image image) {

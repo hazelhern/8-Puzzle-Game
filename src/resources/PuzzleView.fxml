@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.Label?>
 <StackPane fx:controller="Controller.PuzzleController"
            xmlns:fx="http://javafx.com/fxml"
            xmlns="http://javafx.com/javafx"
@@ -41,5 +42,10 @@
             <Button fx:id="shuffleButton" text="Shuffle" onAction="#handleShuffle"/>
             <Button fx:id="solveButton" text="Solve" onAction="#handleSolve"/>
         </HBox>
+
+        <HBox alignment="CENTER">
+            <Label fx:id="solvedLabel" text="SOLVED" layoutX="100" layoutY="100" visible="false"/>
+        </HBox>
+
     </VBox>
 </StackPane>
