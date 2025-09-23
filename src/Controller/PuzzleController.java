@@ -27,6 +27,7 @@ public class PuzzleController {
     private ImageView[] puzzleTiles = new ImageView[9];
     private int blankTileIndex = 8;
     private Image originalImage;
+    private int[] position = new int[9];
 
 
     public void initialize(){
@@ -141,6 +142,11 @@ public class PuzzleController {
             if (i == tileCount - 1) {
                 tileView.setImage(null);
             }
+            if (i != tileCount - 1) {
+                position[i] = i + 1;
+            } else {
+                position[i] = 0; // blank tile
+            }
 
             puzzleTiles[i] = tileView;
         }
@@ -165,6 +171,10 @@ public class PuzzleController {
                     swapTiles(clickedIndex, blankTileIndex);
                     blankTileIndex = clickedIndex;
                     displayTiles();
+
+                    if (isSolved()){
+                        handleSolve();
+                    }
                 }
             });
 
@@ -183,6 +193,10 @@ public class PuzzleController {
         ImageView temp = puzzleTiles[i];
         puzzleTiles[i] = puzzleTiles[j];
         puzzleTiles[j] = temp;
+
+        int tempValue = position[i];
+        position[i] = position[j];
+        position[j] = tempValue;
     }
 
     private List<Integer> getMovableIndices(int blankIndex){
@@ -196,5 +210,14 @@ public class PuzzleController {
         if (col < 2) neighbors.add(blankIndex + 1);
 
         return neighbors;
+    }
+
+    private boolean isSolved() {
+        for (int i = 0; i < 8; i++) {
+            if (position[i] != i +1){
+                return false;
+            }
+        }
+        return position[8] == 0;
     }
 }
