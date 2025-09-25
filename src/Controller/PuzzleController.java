@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.PuzzleSolver;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
@@ -9,10 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.*;
 
 public class PuzzleController {
@@ -28,6 +31,7 @@ public class PuzzleController {
     private int blankTileIndex = 8;
     private Image originalImage;
     private int[] position = new int[9];
+    private Image croppedImage;
 
 
     public void initialize(){
@@ -39,7 +43,7 @@ public class PuzzleController {
     }
 
     private void setupPuzzleWithImage(Image image) {
-        Image croppedImage = getCroppedSquareImage(image);
+        croppedImage = getCroppedSquareImage(image);
 
         backgroundImageView.setImage(croppedImage);
         backgroundImageView.setFitWidth(365);
@@ -107,11 +111,107 @@ public class PuzzleController {
 
     @FXML
     private void handleSolve() {
-        puzzleGrid.setVisible(false);
-        backgroundImageView.setOpacity(100);
+        List<int[]> solution = PuzzleSolver.solve(position);
 
-        solvedLabel.setVisible(true);
+        if (solution == null) {
+            solvedLabel.setText("Unsolvable Puzzle");
+            solvedLabel.setVisible(true);
+            return;
+        }
+
+        Timeline timeline = new Timeline();
+        int delay = 500;
+
+        for (int i = 0; i < solution.size(); i++) {
+            int[] state = solution.get(i);
+            int index = i;
+            boolean isFinalStep = (index == solution.size() - 1);
+
+            timeline.getKeyFrames().add(
+                    new KeyFrame(Duration.millis(i * delay), e -> {
+                        updatePuzzleFromState(state, isFinalStep);
+                        if (isFinalStep) {
+                            solvedLabel.setText("Solved!");
+                            solvedLabel.setVisible(true);
+                        }
+                    })
+            );
+        }
+        timeline.play();
     }
+
+
+    private void updatePuzzleFromState(int[] newPosition, boolean showBlankTileImage) {
+        position = newPosition.clone();
+        puzzleTiles = new ImageView[9];
+
+        int tilesPerRow = 3;
+        double tileWidth = croppedImage.getWidth() / tilesPerRow;
+        double tileHeight = croppedImage.getHeight() / tilesPerRow;
+
+        for (int i = 0; i < 9; i++) {
+            int value = position[i];
+
+            if (value == 0) {
+                if (showBlankTileImage) {
+                    // shows the real image for the last tile
+                    int row = 2;
+                    int col = 2;
+
+                    Rectangle2D viewport = new Rectangle2D(
+                            col * tileWidth,
+                            row * tileHeight,
+                            tileWidth,
+                            tileHeight
+                    );
+
+                    ImageView tileView = new ImageView(croppedImage);
+                    tileView.setViewport(viewport);
+                    tileView.setFitWidth(120);
+                    tileView.setFitHeight(120);
+                    tileView.setPreserveRatio(true);
+
+                    puzzleTiles[i] = tileView;
+                } else {
+                    puzzleTiles[i] = new ImageView();
+                }
+
+                continue;
+            }
+
+            int row = (value - 1) / 3;
+            int col = (value - 1) % 3;
+
+            Rectangle2D viewport = new Rectangle2D(
+                    col * tileWidth,
+                    row * tileHeight,
+                    tileWidth,
+                    tileHeight
+            );
+
+            ImageView tileView = new ImageView(croppedImage);
+            tileView.setViewport(viewport);
+            tileView.setFitWidth(120);
+            tileView.setFitHeight(120);
+            tileView.setPreserveRatio(true);
+
+            puzzleTiles[i] = tileView;
+        }
+
+        blankTileIndex = findBlankIndex();
+        displayTiles();
+    }
+
+
+
+    private int findBlankIndex() {
+        for (int i = 0; i < position.length; i++) {
+            if (position[i] == 0) return i;
+        }
+        return 8;
+    }
+
+
 
     private void createTiles(Image image) {
         int tileCount = 9;
@@ -173,13 +273,19 @@ public class PuzzleController {
                     displayTiles();
 
                     if (isSolved()){
-                        handleSolve();
+                        handleManualSolved();
                     }
                 }
             });
 
             puzzleGrid.add(tile, col, row);
         }
+    }
+
+    private void handleManualSolved() {
+        updatePuzzleFromState(position, true);
+        solvedLabel.setText("Solved!");
+        solvedLabel.setVisible(true);
     }
 
     private boolean isAdjacent(int i1, int i2){
